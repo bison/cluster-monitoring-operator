@@ -82,6 +82,12 @@ image: .hack-operator-image
 # Generating #
 ##############
 
+include $(addprefix ./vendor/github.com/openshift/build-machinery-go/make/, \
+  targets/openshift/crd-schema-gen.mk \
+)
+
+$(call add-crd-gen,monitoring-v1alpha1,./pkg/apis/monitoring/v1alpha1,./manifests,./manifests)
+
 .PHONY: vendor
 vendor:
 	go mod tidy
